@@ -1,69 +1,71 @@
-create database if not exists bai_2;
-use bai_2;
+CREATE DATABASE IF NOT EXISTS bai_2;
+USE bai_2;
 
-create table VATTU(
-	MaVTU int primary key,
-    TenVTU varchar(50)
+
+CREATE TABLE VatTu (
+    MaVTu INT PRIMARY KEY,
+    TenVTu VARCHAR(50)
 );
 
-create table PHIEUXUAT(
-	SoPX int primary key,
-    NgayXuat date
+CREATE TABLE PhieuXuat (
+    SoPX INT PRIMARY KEY,
+    NgayXuat DATE
 );
 
-create table XUAT_VTU(
-	SoPX int,
-    MaVTU int,
-    DGXuat varchar(50),
-    SLXuat int,
-    primary key(SoPX, MaVTU),
-    foreign key (SoPX) references PHIEUXUAT(SoPX),
-    foreign key (MaVTU) references VATTU(MaVTU)
+CREATE TABLE Xuat_VTu (
+    SoPX INT,
+    MaVTu INT,
+    DGXuat DECIMAL(10,2),
+    SLXuat INT,
+    PRIMARY KEY (SoPX, MaVTu),
+    FOREIGN KEY (SoPX) REFERENCES PhieuXuat(SoPX),
+    FOREIGN KEY (MaVTu) REFERENCES VatTu(MaVTu)
 );
 
-create table PHIEUNHAP(
-	SoPN int primary key,
-    NgayNhap date
+CREATE TABLE PhieuNhap (
+    SoPN INT PRIMARY KEY,
+    NgayNhap DATE
 );
 
-create table NHAP_VTU(
-	SoPN int,
-    MaVTU int,
-    DGNhap varchar(50),
-    SLNhap int,
-    primary key(SoPN, MaVTU),
-	foreign key (SoPN) references PHIEUNHAP(SoPN),
-    foreign key (MaVTU) references VATTU(MaVTU)
+CREATE TABLE Nhap_VTu (
+    SoPN INT,
+    MaVTu INT,
+    DGNhap DECIMAL(10,2),
+    SLNhap INT,
+    PRIMARY KEY (SoPN, MaVTu),
+    FOREIGN KEY (SoPN) REFERENCES PhieuNhap(SoPN),
+    FOREIGN KEY (MaVTu) REFERENCES VatTu(MaVTu)
 );
 
-create table DONDH(
-	SoDH int auto_increment primary key,
-    NgayDH date
+CREATE TABLE DonDH (
+    SoDH INT AUTO_INCREMENT PRIMARY KEY,
+    NgayDH DATE
 );
 
-create table DDH_VTU(
-	MaVTU int,
-    SoDH int,
-    primary key(MaVTU, SoDH),
-    foreign key (MaVTU) references VATTU(MaVTU),
-    foreign key (SoDH) references DONDH(SoDH)
+CREATE TABLE DDH_VTu (
+    MaVTu INT,
+    SoDH INT,
+    PRIMARY KEY (MaVTu, SoDH),
+    FOREIGN KEY (MaVTu) REFERENCES VatTu(MaVTu),
+    FOREIGN KEY (SoDH) REFERENCES DonDH(SoDH)
 );
 
-create table NHACC(
-	MaNCC int primary key,
-    TenNCC varchar(50),
-    DiaChi varchar(50)
-);
-create table SDT(
-	SDTNCC varchar(10) primary key,
-    MaNCC int,
-    foreign key(MaNCC) references NHACC(MaNCC)
+CREATE TABLE NhaCC (
+    MaNCC INT PRIMARY KEY,
+    TenNCC VARCHAR(50),
+    DiaChi VARCHAR(50)
 );
 
-create table DH_NCC(
-	SoDH int,
-    MaNCC int,
-    primary key(SoDH, MaNCC),
-    foreign key(SoDH) references DONDH(SoDH),
-    foreign key(MaNCC) references NHACC(MaNCC)
+CREATE TABLE SDT (
+    SDTNCC VARCHAR(10) PRIMARY KEY,
+    MaNCC INT,
+    FOREIGN KEY (MaNCC) REFERENCES NhaCC(MaNCC)
+);
+
+CREATE TABLE DH_NCC (
+    SoDH INT,
+    MaNCC INT,
+    PRIMARY KEY (SoDH, MaNCC),
+    FOREIGN KEY (SoDH) REFERENCES DonDH(SoDH),
+    FOREIGN KEY (MaNCC) REFERENCES NhaCC(MaNCC)
 );
