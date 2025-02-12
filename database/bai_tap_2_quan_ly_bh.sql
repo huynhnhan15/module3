@@ -3,7 +3,7 @@ use quan_ly_ban_hang;
 create table Customer(
 	cID int auto_increment primary key,
     cName varchar(50) not null default ("abc"),
-    cAge int
+    cAge int(3)
 );
 create table `Order`(
 	oID int auto_increment primary key,
