@@ -73,7 +73,7 @@ WHERE m.Mark = (SELECT MAX(Mark) FROM Mark);
 SELECT st.StudentId, st.StudentName, COALESCE(AVG(m.Mark), 0) AS AvgMark
 FROM Student st
 LEFT JOIN Mark m ON st.StudentId = m.StudentId
-GROUP BY st.StudentId, st.StudentName
+GROUP BY st.StudentId
 ORDER BY AvgMark DESC;
 
 
