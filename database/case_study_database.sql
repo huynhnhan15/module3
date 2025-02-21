@@ -187,7 +187,7 @@ INSERT INTO khach_hang (
 ('Dương Văn Quan', '1981-07-08', 'Nam', '543243111', '0954533111', 'duongquan@gmail.com', 'K453/12 Lê Lợi, Đà Nẵng', 1),
 ('Hoàng Trần Nhị Nhi', '1995-12-09', 'Nữ', '295654432', '031245678', 'nhinhi123@gmail.com', '224 Lý Thái Tổ, Gia Lai', 4),
 ('Tôn Nữ Mộc Châu', '1987-06-08', 'Nữ', '564321321', '0976543333', 'tonnuchau@gmail.com', 'K234/11 Hải Phòng, Đà Nẵng', 5),
-('Nguyễn Mỹ Kim', '1994-01-07', 'Nữ', '965654321', '0943123456', 'kimcuong84@gmail.com', 'K123/45 Lê Lợi, Hồ Chí Minh', 2),
+('Nguyễn Mỹ Kim', '1994-01-07', 'Nữ', '965654321', '0943123456', 'kimcuong84@gmail.com', 'K123/45 Lê Lợi, Hồ Chí Minh', 1),
 ('Nguyễn Thị Hào', '1990-07-01', 'Nữ', '865342133', '0965433222', 'haohaog9@gmail.com', '198 Văn Linh, Kon Tum', 3),
 ('Trần Đại Danh', '1994-07-01', 'Nam', '334432132', '0953124444', 'danhhai99@gmail.com', '29 Lý Thường Kiệt, Quảng Ngãi', 1),
 ('Nguyễn Tâm Đắc', '1997-01-01', 'Nam', '343312432', '0987654321', 'dactam@gmail.com', '6 Hoà Khánh, Đà Nẵng', 2);
