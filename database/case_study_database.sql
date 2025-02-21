@@ -275,38 +275,5 @@ WHERE lk.ten_loai_khach = 'Diamond'
 GROUP BY kh.ma_khach_hang, kh.ho_ten
 ORDER BY so_lan_dat_phong ASC;
 
--- câu 5
-SELECT 
-    kh.ma_khach_hang,
-    kh.ho_ten,
-    lk.ten_loai_khach,
-    hd.ma_hop_dong,
-    dv.ten_dich_vu,
-    hd.ngay_bat_dau AS ngay_lam_hop_dong,
-    hd.ngay_ket_thuc,
-    /* Tính Tổng tiền = Chi phí thuê + sum(số lượng * giá) */
-    COALESCE(dv.chi_phi_thue, 0)
-      + COALESCE(SUM(hdc.so_luong * dvdk.gia_tien), 0) AS tong_tien
-FROM khach_hang kh
-    /* LEFT JOIN để hiển thị cả khách chưa có hợp đồng (chưa đặt phòng) */
-    LEFT JOIN loai_khach lk 
-        ON kh.ma_loai_khach = lk.ma_loai_khach
-    LEFT JOIN hop_dong hd 
-        ON kh.ma_khach_hang = hd.ma_khach_hang
-    LEFT JOIN dich_vu dv 
-        ON hd.ma_dich_vu = dv.ma_dich_vu
-    LEFT JOIN hop_dong_chi_tiet hdc 
-        ON hd.ma_hop_dong = hdc.ma_hop_dong
-    LEFT JOIN dich_vu_di_kem dvdk 
-        ON hdc.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
-GROUP BY 
-    kh.ma_khach_hang,
-    kh.ho_ten,
-    lk.ten_loai_khach,
-    hd.ma_hop_dong,
-    dv.ten_dich_vu,
-    hd.ngay_bat_dau,
-    hd.ngay_ket_thuc,
-    dv.chi_phi_thue
-ORDER BY kh.ma_khach_hang;
+
 
