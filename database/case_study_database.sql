@@ -247,7 +247,9 @@ INSERT INTO hop_dong_chi_tiet (
 (2, 12, 2);
 
 
--- câu 2
+-- câu 2 
+-- Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự.
+
 SELECT *
 FROM nhan_vien
 WHERE (ho_ten LIKE 'H%' OR ho_ten LIKE 'T%' OR ho_ten LIKE 'K%')
@@ -275,5 +277,85 @@ WHERE lk.ten_loai_khach = 'Diamond'
 GROUP BY kh.ma_khach_hang, kh.ho_ten
 ORDER BY so_lan_dat_phong ASC;
 
+-- câu 5
+select 
+    kh.ma_khach_hang,
+    kh.ho_ten,
+    lk.ten_loai_khach,
+    hd.ma_hop_dong,
+    dv.ten_dich_vu,
+    hd.ngay_lam_hop_dong,
+    hd.ngay_ket_thuc,
+    (dv.chi_phi_thue + ifnull(hdct.so_luong * dvdk.gia, 0)) as tong_tien
+from khach_hang kh
+left join loai_khach lk on kh.ma_loai_khach = lk.ma_loai_khach
+left join hop_dong hd on kh.ma_khach_hang = hd.ma_khach_hang
+left join dich_vu dv on hd.ma_dich_vu = dv.ma_dich_vu
+left join hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
+left join dich_vu_di_kem dvdk on hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+order by kh.ma_khach_hang;
+
+-- câu 6
+select dv.ma_dich_vu, dv.ten_dich_vu, dv.dien_tich, dv.chi_phi_thue, ldv.ten_loai_dich_vu
+from dich_vu dv
+join loai_dich_vu ldv on dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu
+where dv.ma_dich_vu not in (
+    select distinct hd.ma_dich_vu
+    from hop_dong hd
+    where year(hd.ngay_lam_hop_dong) = 2021
+    and month(hd.ngay_lam_hop_dong) in (1, 2, 3)
+);
+
+-- câu 7
+select dv.ma_dich_vu, dv.ten_dich_vu, dv.dien_tich, dv.so_nguoi_toi_da, dv.chi_phi_thue, ldv.ten_loai_dich_vu
+from dich_vu dv
+join loai_dich_vu ldv on dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu
+where dv.ma_dich_vu in (
+    select distinct hd.ma_dich_vu
+    from hop_dong hd
+    where year(hd.ngay_lam_hop_dong) = 2020
+)
+and dv.ma_dich_vu not in (
+    select distinct hd.ma_dich_vu
+    from hop_dong hd
+    where year(hd.ngay_lam_hop_dong) = 2021
+);
+
+-- câu 8
+select distinct ho_ten 
+from khach_hang;
+
+-- 2 group by
+select ho_ten 
+from khach_hang 
+group by ho_ten;
+
+--  3 exists
+select ho_ten 
+from khach_hang kh1 
+where not exists (
+    select 1 from khach_hang kh2 
+    where kh1.ho_ten = kh2.ho_ten 
+    and kh1.ma_khach_hang > kh2.ma_khach_hang
+);
+
+-- câu 9
+select month(hd.ngay_lam_hop_dong) as thang, 
+       count(distinct hd.ma_khach_hang) as so_luong_khach_hang
+from hop_dong hd
+where year(hd.ngay_lam_hop_dong) = 2021
+group by month(hd.ngay_lam_hop_dong)
+order by thang;
+
+-- câu 10
+select hd.ma_hop_dong, 
+       hd.ngay_lam_hop_dong, 
+       hd.ngay_ket_thuc, 
+       hd.tien_dat_coc, 
+       coalesce(sum(hdct.so_luong), 0) as so_luong_dich_vu_di_kem
+from hop_dong hd
+left join hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
+group by hd.ma_hop_dong, hd.ngay_lam_hop_dong, hd.ngay_ket_thuc, hd.tien_dat_coc
+order by hd.ma_hop_dong;
 
 
