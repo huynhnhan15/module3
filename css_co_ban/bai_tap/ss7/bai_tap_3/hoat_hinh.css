@@ -1,88 +1,183 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+.container{
+    height: 595px;
 
-.container {
-    width: 90%;
-    margin: auto;
 }
-
-.header {
-    background: #222;
-    color: white;
-    padding: 15px;
+.logo {
+    font-size: 32px;
+    font-weight: bold;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
-.navbar {
-    display: flex;
+.logo .phim {
+    font-family: Arial, sans-serif;
+    color: black;
+    font-style: italic;
 }
 
-.navbar a {
+.logo .hoot-hinh {
+    background: red;
     color: white;
-    text-decoration: none;
-    padding: 10px 15px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-family: "Arial", sans-serif;
+    position: relative;
 }
 
-.navbar a:hover {
-    background: #444;
+.logo .hoot-hinh::after {
+    content: "😃";
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    font-size: 20px;
 }
 
-.main-content {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
+.main{
+    min-height: 84%;
+}
+.left{
+    background:#c1d6cc;
+}
+.right{
+    background: #c1d6cc;
+    padding: 1%;
+}
+.footer{
+    background:#d3d6d8;
+    height: 8%;
 }
 
-.sidebar {
-    width: 25%;
-    background: #f4f4f4;
-    padding: 15px;
+.center{
+    background: #7abaff;
+    padding: 1%;
 }
-
-.sidebar ul {
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+ul{
     list-style: none;
+
+}
+.header {
+    text-align: center; /* Căn giữa nội dung */
+    background: #f0f0f0 ;
+    height: 8%;
+    padding: 10px 0;
+}
+
+.header ul {
+    display: inline-block; /* Giúp ul căn giữa */
     padding: 0;
 }
 
-.sidebar li {
-    margin: 10px 0;
+.header ul li {
+    display: inline;
+    margin: 0 10px;
+    color: black;
 }
-
-.video-content {
-    width: 50%;
-    padding: 15px;
+.left ul li{
+    margin-top: 7%;
 }
-
-.video-content iframe {
-    width: 100%;
-    height: 315px;
+.right ul li{
+    margin-top: 7%;
 }
-
-.ads {
-    width: 25%;
-    background: #f4f4f4;
-    padding: 15px;
-    text-align: center;
+.row{
+    display: flex; /* nổi lên trên một dòng*/
+    flex-wrap: wrap; /*rớt xuống nếu không đủ chiều rộng*/
 }
-
-.footer {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-    .main-content {
-        flex-direction: column;
+@media only screen and (max-width:740px ){
+    .col-s-1 {width: 8.33333%;}
+    .col-s-2 {width: 16.66667%;}
+    .col-s-3 {width: 25%;}
+    .col-s-4 {width: 33.33333%;}
+    .col-s-5 {width: 41.66667%;}
+    .col-s-6 {width: 50%;}
+    .col-s-7 {width: 58.33333%;}
+    .col-s-8 {width: 66.66667%;}
+    .col-s-9 {width: 75%;}
+    .col-s-10 {width: 83.33333%;}
+    .col-s-11 {width: 91.66667%;}
+    .col-s-12 {width: 100%;}
+    /*tăng kích thước font cho dễ đọc*/
+    .left li{
+        font-size: 40px;
+        text-align: center;
+        color: white;
     }
-    .sidebar, .video-content, .ads {
-        width: 100%;
+    .right li a{
+        font-size: 40px;
+        text-align: center;
+        color: red;
     }
+    p{
+        font-size: 35px;
+        color: darkblue;
+        margin: 5px;
+    }
+    .title{
+        font-size: 55px;
+        color: red;
+    }
+    div {
+        padding: 20px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+
+    }
+    /*Ẩn phần list*/
+
+    /*.header ul{*/
+    /*    display: none;*/
+    /*}*/
+    /*!*Hiện thị dropdown*!*/
+    /*.header select{*/
+    /*    height: 32px;*/
+    /*    display: inline;*/
+    /*}*/
+}
+/*Màn hinh laptop và máy tính bảng*/
+@media only screen and (min-width:741px)and (max-width:1240px){
+    .col-m-1 {width: 8.33333%;}
+    .col-m-2 {width: 16.66667%;}
+    .col-m-3 {width: 25%;}
+    .col-m-4 {width: 33.33333%;}
+    .col-m-5 {width: 41.66667%;}
+    .col-m-6 {width: 50%;}
+    .col-m-7 {width: 58.33333%;}
+    .col-m-8 {width: 66.66667%;}
+    .col-m-9 {width: 75%;}
+    .col-m-10 {width: 83.33333%;}
+    .col-m-11 {width: 91.66667%;}
+    .col-m-12 {width: 100%;}
+
+    /*.header ul{*/
+    /*    display: block;*/
+    /*}*/
+    /*.header select{*/
+    /*    display: none;*/
+    /*}*/
+
+}
+
+@media only screen and (min-width:1241px){
+    .col-l-1 {width: 8.33333%;}
+    .col-l-2 {width: 16.66667%;}
+    .col-l-3 {width: 25%;}
+    .col-l-4 {width: 33.33333%;}
+    .col-l-5 {width: 41.66667%;}
+    .col-l-6 {width: 50%;}
+    .col-l-7 {width: 58.33333%;}
+    .col-l-8 {width: 66.66667%;}
+    .col-l-9 {width: 75%;}
+    .col-l-10 {width: 83.33333%;}
+    .col-l-11 {width: 91.66667%;}
+    .col-l-12 {width: 100%;}
+
+    /*.header ul{*/
+    /*    display: block;*/
+    /*}*/
+    /*.header select{*/
+    /*    display: none;*/
+    /*}*/
 }
