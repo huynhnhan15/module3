@@ -7,4 +7,4 @@
 <h1>Chào mừng đến với ứng dụng Quản lý sản phẩm</h1>
 <a href="products">Xem danh sách sản phẩm</a>
 </body>
-</html>
+</html>\
