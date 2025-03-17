@@ -1,54 +1,50 @@
 package com.codgym.ss11.repository;
 
 import com.codgym.ss11.model.Product;
+import com.codgym.ss11.util.BaseRepository;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepositoryImpl implements IProductRepository {
-    private static List<Product> products = new ArrayList<>();
-
-    static {
-        products.add(new Product(1, "Laptop Dell", 1500, "Laptop văn phòng", "Dell"));
-        products.add(new Product(2, "iPhone 14", 1200, "Điện thoại Apple", "Apple"));
-        products.add(new Product(3, "Samsung S23", 1100, "Điện thoại Samsung", "Samsung"));
-    }
+    private static final String SELECT_ALL = "SELECT * FROM Product";
+    private static final String INSERT_PRODUCT = "INSERT INTO Product(name, price, description, manufacturer) VALUES (?, ?, ?, ?)";
 
     @Override
     public List<Product> findAll() {
+        List<Product> products = new ArrayList<>();
+        Connection connection = BaseRepository.getConnectDB();
+
+        if (connection == null) {
+            System.err.println("❌ Lỗi: Không thể kết nối đến database!");
+            return products; // Trả về danh sách rỗng để tránh lỗi NullPointerException
+        }
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                String manufacturer = resultSet.getString("manufacturer");
+
+                products.add(new Product(id, name, price, description, manufacturer));
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Lỗi khi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
         return products;
     }
 
-    @Override
-    public void save(Product product) {
-        products.add(product);
-    }
 
     @Override
     public Product findById(int id) {
-        return products.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+        return null;
     }
 
-    @Override
-    public void update(Product product) {
-        for (Product p : products) {
-            if (p.getId() == product.getId()) {
-                p.setName(product.getName());
-                p.setPrice(product.getPrice());
-                p.setDescription(product.getDescription());
-                p.setManufacturer(product.getManufacturer());
-                break;
-            }
-        }
-    }
 
-    @Override
-    public void delete(int id) {
-        products.removeIf(p -> p.getId() == id);
-    }
-
-    @Override
-    public List<Product> searchByName(String name) {
-        return products.stream().filter(p -> p.getName().toLowerCase().contains(name.toLowerCase())).toList();
-    }
 }

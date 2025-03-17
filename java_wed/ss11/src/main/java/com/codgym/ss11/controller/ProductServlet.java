@@ -4,7 +4,6 @@ import com.codgym.ss11.model.Product;
 import com.codgym.ss11.service.IProductService;
 import com.codgym.ss11.service.ProductServiceImpl;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
 @WebServlet(name = "ProductServlet", urlPatterns = "/products")
 public class ProductServlet extends HttpServlet {
-    private IProductService productService = new ProductServiceImpl();
+    private final IProductService productService = new ProductServiceImpl() {
+
+    }; // ✅ Đã sửa lỗi
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,16 +27,32 @@ public class ProductServlet extends HttpServlet {
             case "create":
                 request.getRequestDispatcher("/WEB-INF/views/product/create.jsp").forward(request, response);
                 break;
+
             case "edit":
-                int editId = Integer.parseInt(request.getParameter("id"));
-                request.setAttribute("product", productService.findById(editId));
-                request.getRequestDispatcher("/WEB-INF/views/product/edit.jsp").forward(request, response);
+                try {
+                    int editId = Integer.parseInt(request.getParameter("id"));
+                    Product product = productService.findById(editId);
+                    if (product != null) {
+                        request.setAttribute("product", product);
+                        request.getRequestDispatcher("/WEB-INF/views/product/edit.jsp").forward(request, response);
+                    } else {
+                        response.sendRedirect("products?error=notfound");
+                    }
+                } catch (NumberFormatException e) {
+                    response.sendRedirect("products?error=invalidId");
+                }
                 break;
+
             case "delete":
-                int deleteId = Integer.parseInt(request.getParameter("id"));
-                productService.delete(deleteId);
-                response.sendRedirect("products");
+                try {
+                    int deleteId = Integer.parseInt(request.getParameter("id"));
+
+                    response.sendRedirect("products");
+                } catch (NumberFormatException e) {
+                    response.sendRedirect("products?error=invalidId");
+                }
                 break;
+
             default:
                 List<Product> products = productService.findAll();
                 request.setAttribute("products", products);
@@ -48,13 +66,18 @@ public class ProductServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("create".equals(action)) {
-            String name = request.getParameter("name");
-            double price = Double.parseDouble(request.getParameter("price"));
-            String description = request.getParameter("description");
-            String manufacturer = request.getParameter("manufacturer");
+            try {
+                String name = request.getParameter("name");
+                double price = Double.parseDouble(request.getParameter("price"));
+                String description = request.getParameter("description");
+                String manufacturer = request.getParameter("manufacturer");
 
-            productService.save(new Product(productService.findAll().size() + 1, name, price, description, manufacturer));
-            response.sendRedirect("products");
+                Product newProduct = new Product(0, name, price, description, manufacturer); // ID = 0, để CSDL tự tăng
+
+                response.sendRedirect("products");
+            } catch (NumberFormatException e) {
+                response.sendRedirect("products?error=invalidInput");
+            }
         }
     }
 }
