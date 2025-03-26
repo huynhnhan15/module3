@@ -37,4 +37,62 @@ from Products;
 -- xóa view 
 drop view ProductInfo;
 
+-- câu 5
+DELIMITER //
 
+CREATE PROCEDURE GetAllProducts()
+BEGIN
+    SELECT * FROM Products;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE AddProduct(
+    IN p_code VARCHAR(50),
+    IN p_name VARCHAR(100),
+    IN p_price DECIMAL(10, 2),
+    IN p_amount INT,
+    IN p_description TEXT,
+    IN p_status BOOLEAN
+)
+BEGIN
+    INSERT INTO Products (productCode, productName, productPrice, productAmount, productDescription, productStatus)
+    VALUES (p_code, p_name, p_price, p_amount, p_description, p_status);
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE UpdateProduct(
+    IN p_id INT,
+    IN p_code VARCHAR(50),
+    IN p_name VARCHAR(100),
+    IN p_price DECIMAL(10, 2),
+    IN p_amount INT,
+    IN p_description TEXT,
+    IN p_status BOOLEAN
+)
+BEGIN
+    UPDATE Products
+    SET productCode = p_code,
+        productName = p_name,
+        productPrice = p_price,
+        productAmount = p_amount,
+        productDescription = p_description,
+        productStatus = p_status
+    WHERE Id = p_id;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteProduct(IN p_id INT)
+BEGIN
+    DELETE FROM Products WHERE Id = p_id;
+END //
+
+DELIMITER ;

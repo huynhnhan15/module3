@@ -28,7 +28,7 @@ public class PhoneServlet extends HttpServlet {
                 showCreateForm(request, response);
                 break;
             case "search":
-                searchPhone(request, response);
+//                searchPhone(request, response);
                 break;
             default:
                 listPhones(request, response);
@@ -44,17 +44,6 @@ public class PhoneServlet extends HttpServlet {
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("phones/create.jsp").forward(request, response);
     }
-
-
-
-    private void searchPhone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String searchName = request.getParameter("searchName");
-        List<Phone> phones = phoneService.searchByName(searchName);
-        request.setAttribute("phones", phones);
-        request.getRequestDispatcher("phones/list.jsp").forward(request, response);
-    }
-
-
 
 
 }

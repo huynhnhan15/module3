@@ -18,9 +18,4 @@ public class PhoneService implements IPhoneService {
     public Phone findById(int id) {
         return phoneRepository.findById(id);
     }
-
-    @Override
-    public List<Phone> searchByName(String name) {
-        return phoneRepository.searchByName(name);
-    }
 }

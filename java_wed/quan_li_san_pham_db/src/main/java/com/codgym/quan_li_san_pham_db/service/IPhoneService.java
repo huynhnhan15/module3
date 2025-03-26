@@ -9,7 +9,6 @@ public interface IPhoneService {
 
     Phone findById(int id);
 
-    List<Phone> searchByName(String name);
 
 
 }
