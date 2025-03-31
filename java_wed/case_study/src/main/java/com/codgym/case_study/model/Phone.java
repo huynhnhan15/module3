@@ -1,4 +1,4 @@
-package com.codgym.project_m3_team4.model;
+package com.codgym.case_study.model;
 
 public class Phone {
     private int idDienThoai;
