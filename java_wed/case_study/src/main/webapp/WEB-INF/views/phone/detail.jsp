@@ -75,7 +75,7 @@
                     <select name="newStatus" id="newStatus" class="form-select">
                         <option value="Còn hàng" ${phone.trangThai == 'Còn hàng' ? 'selected' : ''}>con_hang</option>
                         <option value="Hết hàng" ${phone.trangThai == 'Hết hàng' ? 'selected' : ''}>het_hang</option>
-                        <option value="Ngừng kinh doanh" ${phone.trangThai == 'Ngừng kinh doanh' ? 'selected' : ''}>Khong_ban</option>
+                        <option value="Ngừng kinh doanh" ${phone.trangThai == 'Ngừng kinh doanh' ? 'selected' : ''}>Chưa làm Được</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-success">Cập nhật trạng thái</button>

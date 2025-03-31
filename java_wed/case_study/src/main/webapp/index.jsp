@@ -9,12 +9,33 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .card img {
-            height: 200px;
-            object-fit: cover;
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .card-img-container {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+        .card-img-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         .card-body {
             text-align: center;
+            padding: 15px;
         }
     </style>
 </head>
@@ -26,18 +47,18 @@
         <a href="${pageContext.request.contextPath}/phone/add" class="btn btn-success">Thêm sản phẩm</a>
     </div>
 
-    <!-- Thanh tìm kiếm sản phẩm -->
     <form class="d-flex mb-4" action="${pageContext.request.contextPath}/phone/search" method="get">
         <input class="form-control me-2" type="search" name="keyword" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
     </form>
 
-    <!-- Danh sách sản phẩm -->
     <div class="row">
         <c:forEach var="phone" items="${phoneList}">
             <div class="col-md-4 mb-4">
                 <div class="card">
-                    <img src="${pageContext.request.contextPath}/uploads/${phone.hinhAnh}" class="card-img-top" alt="${phone.ten}">
+                    <div class="card-img-container">
+                        <img src="${pageContext.request.contextPath}/uploads/${phone.hinhAnh}" alt="${phone.ten}">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">${phone.ten}</h5>
                         <p class="card-text">

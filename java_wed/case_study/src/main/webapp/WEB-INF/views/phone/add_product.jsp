@@ -57,13 +57,13 @@
         </div>
         <div class="mb-3">
             <label for="hinhAnh" class="form-label">Đường dẫn ảnh</label>
-            <input type="text" class="form-control" id="hinhAnh" name="hinhAnh" placeholder="uploads/ten_anh.jpg" required>
+            <input type="text" class="form-control" id="hinhAnh" name="hinhAnh" placeholder="ten_anh.jpg" required>
         </div>
         <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
         <a href="${pageContext.request.contextPath}/phone" class="btn btn-secondary">Hủy</a>
     </form>
 </div>
-<!-- Bootstrap JS Bundle -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

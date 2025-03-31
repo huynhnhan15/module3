@@ -45,7 +45,6 @@ public class PhoneController extends HttpServlet {
         }
     }
 
-    // Xử lý POST cho thêm sản phẩm
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getServletPath();
@@ -53,7 +52,7 @@ public class PhoneController extends HttpServlet {
             case "/phone/updateStatus":
                 updatePhoneStatus(request, response);
                 break;
-            case "/phone/add":  // ✅ Thêm dòng này
+            case "/phone/add":
                 addProduct(request, response);
                 break;
             default:
@@ -124,12 +123,10 @@ public class PhoneController extends HttpServlet {
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
-    // Hiển thị form thêm sản phẩm
     private void showAddProductForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/views/phone/add_product.jsp").forward(request, response);
     }
 
-    // Xử lý thêm sản phẩm và lưu vào database
     private void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy dữ liệu từ form
         String ten = request.getParameter("ten");
@@ -157,10 +154,9 @@ public class PhoneController extends HttpServlet {
         phone.setTrangThai(trangThai);
         phone.setHinhAnh(hinhAnh);
 
-        // Gọi service để thêm sản phẩm vào database
+
         phoneService.addPhone(phone);
 
-        // Sau khi thêm, chuyển về danh sách sản phẩm
         response.sendRedirect(request.getContextPath() + "/phone");
     }
 

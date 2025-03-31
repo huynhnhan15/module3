@@ -8,7 +8,7 @@ public interface IPhoneService {
     Phone getPhoneById(int id);
     void deletePhoneById(int id);
     List<Phone> searchPhones(String keyword);
-    void addPhone(Phone phone); // Thêm phương thức thêm sản phẩm
+    void addPhone(Phone phone);
 
     void updatePhoneStatus(int id, String newStatus);
 }

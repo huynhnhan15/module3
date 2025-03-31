@@ -20,7 +20,6 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users = userService.getAllUsers();
 
-        // Kiểm tra danh sách user có dữ liệu không
         if (users == null || users.isEmpty()) {
             System.out.println("Danh sách người dùng rỗng!");
         } else {
