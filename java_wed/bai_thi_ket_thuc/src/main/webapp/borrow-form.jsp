@@ -17,6 +17,9 @@
                 ${errorMessage}
         </div>
     </c:if>
+    <div class="mb-3">
+        <a href="books" class="btn btn-primary">Quay lại danh sách sách</a>
+    </div>
 
     <div class="card">
         <div class="card-body">
@@ -54,7 +57,6 @@
                 </div>
 
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-secondary me-2" id="returnButton">Trở về danh sách</button>
                     <button type="submit" class="btn btn-primary">Mượn sách</button>
                 </div>
             </form>

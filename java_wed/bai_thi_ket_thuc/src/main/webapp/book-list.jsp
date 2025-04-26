@@ -11,6 +11,10 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Danh sách sách thư viện</h1>
 
+    <div class="mb-3">
+        <a href="borrow-list" class="btn btn-primary">Danh sách sách đã mượn</a>
+    </div>
+
     <table class="table table-striped table-hover">
         <thead class="table-dark">
         <tr>

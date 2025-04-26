@@ -5,7 +5,7 @@ import com.codgym.bai_thi_ket_thuc.model.Book;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IBookRepository {
+public interface    IBookRepository {
     List<Book> findAll() throws SQLException;
     Book findById(String id) throws SQLException;
     void save(Book book) throws SQLException;
